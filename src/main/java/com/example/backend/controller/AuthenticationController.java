@@ -3,6 +3,7 @@ package com.example.backend.controller;
 
 import com.example.backend.entity.User;
 import com.example.backend.service.AuthenticationService;
+import com.example.backend.service.JwtRefreshTokenService;
 import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +21,8 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
-   // @Autowired
-   // private JwtRefreshTokenService jwtRefreshTokenService;
+   @Autowired
+   private JwtRefreshTokenService jwtRefreshTokenService;
 
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@RequestBody User user){

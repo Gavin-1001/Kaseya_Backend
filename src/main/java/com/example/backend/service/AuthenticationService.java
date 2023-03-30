@@ -5,6 +5,6 @@ import com.example.backend.entity.User;
 public interface AuthenticationService {
 
 
-    User signInAndReturnJwt(User user);
+    User signInAndReturnJwt(User signInRequest);
 
 }
