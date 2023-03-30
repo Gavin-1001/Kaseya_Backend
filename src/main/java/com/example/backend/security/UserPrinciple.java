@@ -2,20 +2,17 @@ package com.example.backend.security;
 
 
 import com.example.backend.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Set;
 
-@Data
-@Builder
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserPrinciple implements UserDetails {
 
 

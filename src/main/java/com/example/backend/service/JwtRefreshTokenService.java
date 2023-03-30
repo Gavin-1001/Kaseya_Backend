@@ -1,10 +1,11 @@
 package com.example.backend.service;
 
+import com.example.backend.entity.JwtRefreshToken;
 import com.example.backend.entity.User;
 
-public class JwtRefreshTokenService {
-    public User generateAccessTokenFromRefreshToken(String token) {
+public interface JwtRefreshTokenService {
 
-        return null;
-    }
+    JwtRefreshToken createRefreshToken(Long userId);
+
+    User generateAccessTokenFromRefreshToken(String refreshTokenId);
 }

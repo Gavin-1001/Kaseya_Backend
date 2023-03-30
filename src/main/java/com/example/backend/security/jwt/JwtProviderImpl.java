@@ -1,13 +1,16 @@
 package com.example.backend.security.jwt;
 
+import com.example.backend.security.UserPrinciple;
 import com.example.backend.utils.SecurityUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +52,7 @@ public class JwtProviderImpl implements JwtProvider {
     }
 
     @Override
-    public Authentication getAuthenication(HttpServletRequest request) {
+    public Authentication getAuthentication(HttpServletRequest request) {
         Claims claims = extractClaims(request);
 
         if (claims == null) {
@@ -61,6 +64,17 @@ public class JwtProviderImpl implements JwtProvider {
         Set<GrantedAuthority> authorities = Arrays.stream(claims.get("roles").toString().split(","))
                 .map(SecurityUtils::convertToAuthority)
                 .collect(Collectors.toSet());
+
+        UserDetails userDetails = UserPrinciple.builder()
+                .username(username)
+                .authorities(authorities)
+                .id(userId)
+                .build();
+
+        if(username == null){
+            return null;
+        }
+        return new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
     }
 
     private Claims extractClaims(HttpServletRequest request) {
@@ -70,7 +84,7 @@ public class JwtProviderImpl implements JwtProvider {
             return null;
         }
 
-        Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8);
+        Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
