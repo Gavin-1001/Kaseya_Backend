@@ -19,7 +19,7 @@ public class UserPrinciple implements UserDetails {
     private Long id;
     private String username;
     transient private String password;
-    transient private User user;
+    private User user;
     private Set<GrantedAuthority> authorities;
 
 
