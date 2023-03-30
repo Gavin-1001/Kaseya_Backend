@@ -3,6 +3,7 @@ package com.example.backend.security.jwt;
 import com.example.backend.utils.SecurityUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -25,16 +26,24 @@ public class JwtProviderImpl implements JwtProvider {
     @Value("ThisisarandomsecretKeyTest12345!!!!!!")
     private String JWT_SECRET;
 
+    @Value("36000000")
+    private Long JWT_EXPIRATION_IN_MS;
+
     @Override
     public String generateToken(UserPrincipal auth) {
         String authorities = auth.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
-        Key key = Keys.hmacSharSkyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
+        Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
-                .setSubject(auth.g)
+                .setSubject(auth.getUsername())
+                .claim("roles", authorities)
+                .claim("userId", auth.getId())
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION_IN_MS))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact()
 
                 ;
     }
