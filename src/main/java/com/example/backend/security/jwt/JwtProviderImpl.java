@@ -1,6 +1,5 @@
 package com.example.backend.security.jwt;
 
-import com.example.backend.security.UserPrinciple;
 import com.example.backend.utils.SecurityUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -15,7 +14,8 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.attribute.UserPrincipal;
+
+import com.example.backend.security.UserPrincipal;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Date;
@@ -33,7 +33,8 @@ public class JwtProviderImpl implements JwtProvider {
     private Long JWT_EXPIRATION_IN_MS;
 
     @Override
-    public String generateToken(UserPrincipal auth) {
+    public String generateToken(UserPrincipal auth)
+    {
         String authorities = auth.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
@@ -45,10 +46,8 @@ public class JwtProviderImpl implements JwtProvider {
                 .claim("roles", authorities)
                 .claim("userId", auth.getId())
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION_IN_MS))
-                .signWith(key, SignatureAlgorithm.HS256)
-                .compact()
-
-                ;
+                .signWith(key, SignatureAlgorithm.HS512)
+                .compact();
     }
 
     @Override
@@ -65,7 +64,7 @@ public class JwtProviderImpl implements JwtProvider {
                 .map(SecurityUtils::convertToAuthority)
                 .collect(Collectors.toSet());
 
-        UserDetails userDetails = UserPrinciple.builder()
+        UserDetails userDetails = UserPrincipal.builder()
                 .username(username)
                 .authorities(authorities)
                 .id(userId)
