@@ -30,7 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
                 new UsernamePasswordAuthenticationToken(signInRequest.getUsername(), signInRequest.getPassword())
         );
 
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrinciple();
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         String jwt = jwtProvider.generateToken(userPrincipal);
 
         User signInUser = userPrincipal.getUser();

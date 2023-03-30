@@ -18,10 +18,15 @@ public class User {
 
     private String password;
 
+    @Transient
     private String accessToken;
 
+    @Transient
     private String refreshToken;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
 
 
     public User(Long id, String username, String password) {
