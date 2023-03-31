@@ -9,6 +9,8 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
@@ -26,7 +28,12 @@ public class EmployeeController {
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee)  {
         Employee newEmployee = employeeService.addEmployee(employee);
         return new ResponseEntity<>(newEmployee, HttpStatus.OK);
+    }
 
+    @GetMapping("/Employees")
+    public ResponseEntity<List<Employee>> getEmployees(){
+        List<Employee> employees = employeeService.findAllEmployees();
+        return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
 
