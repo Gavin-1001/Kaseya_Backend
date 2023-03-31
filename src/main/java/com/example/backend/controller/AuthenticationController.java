@@ -2,12 +2,15 @@ package com.example.backend.controller;
 
 
 import com.example.backend.entity.User;
+import com.example.backend.exception.UsernameExistsException;
 import com.example.backend.service.authService.AuthenticationService;
 import com.example.backend.service.jwtTokenService.JwtRefreshTokenService;
 import com.example.backend.service.UserService;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,9 +28,10 @@ public class AuthenticationController {
    private JwtRefreshTokenService jwtRefreshTokenService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> signUp(@RequestBody User user){
-        if (userService.findByUsername(user.getUsername()).isPresent()) {
+    public ResponseEntity<?> signUp(@RequestBody User user) throws UsernameExistsException {
+        if (userService.findByUsername(user.getUsername()).isPresent())  {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
+
         }
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }

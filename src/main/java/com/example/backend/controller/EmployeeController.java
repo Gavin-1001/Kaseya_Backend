@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.entity.Employee;
+import com.example.backend.exception.UsernameExistsException;
 import com.example.backend.service.emoployeeService.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,10 @@ public class EmployeeController {
     }
 
     @PostMapping("/Employees") //create employee
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
+    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee)  {
         Employee newEmployee = employeeService.addEmployee(employee);
         return new ResponseEntity<>(newEmployee, HttpStatus.OK);
+
     }
 
 
