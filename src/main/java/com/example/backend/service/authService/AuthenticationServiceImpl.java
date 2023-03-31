@@ -1,8 +1,9 @@
-package com.example.backend.service;
+package com.example.backend.service.authService;
 
 import com.example.backend.entity.User;
 import com.example.backend.security.UserPrincipal;
 import com.example.backend.security.jwt.JwtProvider;
+import com.example.backend.service.jwtTokenService.JwtRefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

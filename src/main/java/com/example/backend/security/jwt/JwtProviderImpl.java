@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Component
 public class JwtProviderImpl implements JwtProvider {
 
-    @Value("ThisisarandomsecretKeyTest12345!!!!!!")
+    @Value("RandomSecretKey1234567890!RandomSecretKey1234567890!RandomSecretKey1234567890!RandomSecretKey1234567890!")
     private String JWT_SECRET;
 
     @Value("36000000")

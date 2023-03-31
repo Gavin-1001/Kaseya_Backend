@@ -12,7 +12,7 @@ public class SecurityUtils {
     public static final String AUTH_TOKEN_HEADER = "Bearer";
     public static final String AUTH_TOKEN_PREFIX = AUTH_TOKEN_HEADER + " ";
 
-
+    //converts from userRole to GrantedAuthority
     public static SimpleGrantedAuthority convertToAuthority(String role){
         String formattedRole = role.startsWith(ROLE_PREFIX) ? role : ROLE_PREFIX + role;
         return new SimpleGrantedAuthority(formattedRole);

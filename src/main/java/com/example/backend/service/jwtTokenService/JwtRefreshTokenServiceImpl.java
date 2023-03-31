@@ -1,4 +1,4 @@
-package com.example.backend.service;
+package com.example.backend.service.jwtTokenService;
 
 import com.example.backend.entity.JwtRefreshToken;
 import com.example.backend.entity.User;

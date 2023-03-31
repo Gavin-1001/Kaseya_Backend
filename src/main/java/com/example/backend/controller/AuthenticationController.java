@@ -2,8 +2,8 @@ package com.example.backend.controller;
 
 
 import com.example.backend.entity.User;
-import com.example.backend.service.AuthenticationService;
-import com.example.backend.service.JwtRefreshTokenService;
+import com.example.backend.service.authService.AuthenticationService;
+import com.example.backend.service.jwtTokenService.JwtRefreshTokenService;
 import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class AuthenticationController {
    @Autowired
    private JwtRefreshTokenService jwtRefreshTokenService;
 
-    @PostMapping("/signup")
+    @PostMapping("/register")
     public ResponseEntity<?> signUp(@RequestBody User user){
         if (userService.findByUsername(user.getUsername()).isPresent()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);

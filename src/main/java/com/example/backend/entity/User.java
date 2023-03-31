@@ -25,6 +25,7 @@ public class User {
     private String refreshToken;
 
     @Enumerated(EnumType.STRING)
+    //@Column(name = "role")
     @Column(name = "role", nullable = false)
     private Role role;
 
