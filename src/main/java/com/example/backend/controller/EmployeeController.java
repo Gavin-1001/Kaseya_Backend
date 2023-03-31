@@ -30,11 +30,11 @@ public class EmployeeController {
         return new ResponseEntity<>(newEmployee, HttpStatus.OK);
     }
 
-    @GetMapping("/Employees")
-    public ResponseEntity<List<Employee>> getEmployees(){
-        List<Employee> employees = employeeService.findAllEmployees();
-        return new ResponseEntity<>(employees, HttpStatus.OK);
-    }
+//    @GetMapping("/Employees")
+//    public ResponseEntity<List<Employee>> getEmployees(){
+//        List<Employee> employees = employeeService.findAllEmployees();
+//        return new ResponseEntity<>(employees, HttpStatus.OK);
+//    }
 
 
 
