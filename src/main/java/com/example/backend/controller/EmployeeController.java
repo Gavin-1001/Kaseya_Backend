@@ -36,6 +36,13 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.findAllUsers());
     }
 
+    @PostMapping("employees")
+    public ResponseEntity<?> createUser(){
+        return ResponseEntity.ok(employeeService.addEmployee());
+    }
+
+
+
 
 
 
