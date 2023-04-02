@@ -24,10 +24,26 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @PostMapping("/Employees") //create employee
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee)  {
-        Employee newEmployee = employeeService.addEmployee(employee);
-        return new ResponseEntity<>(newEmployee, HttpStatus.OK);
+//    @PostMapping("/employees") //create employee
+//    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee)  {
+//        Employee newEmployee = employeeService.addEmployee(employee);
+//        return new ResponseEntity<>(newEmployee, HttpStatus.OK);
+//    }
+
+
+    @GetMapping("employees")
+    public ResponseEntity<?> findAllUsers(){
+        return ResponseEntity.ok(employeeService.findAllUsers());
+    }
+
+
+
+
+
+
+    @GetMapping("/hello")
+    public String sayHello(){
+        return "Hello from a secure url";
     }
 
 //    @GetMapping("/Employees")

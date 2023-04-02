@@ -1,5 +1,7 @@
 package com.example.backend.security.jwt;
 
+
+import com.example.backend.security.UserPrincipal;
 import com.example.backend.utils.SecurityUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -14,22 +16,24 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
-
-import com.example.backend.security.UserPrincipal;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
+/**
+ * @author sa
+ * @date 29.10.2021
+ * @time 13:01
+ */
 @Component
-public class JwtProviderImpl implements JwtProvider {
-
-    @Value("RandomSecretKey1234567890!RandomSecretKey1234567890!RandomSecretKey1234567890!RandomSecretKey1234567890!")
+public class JwtProviderImpl implements JwtProvider
+{
+    @Value("${app.jwt.secret}")
     private String JWT_SECRET;
 
-    @Value("36000000")
+    @Value("${app.jwt.expiration-in-ms}")
     private Long JWT_EXPIRATION_IN_MS;
 
     @Override
@@ -51,12 +55,15 @@ public class JwtProviderImpl implements JwtProvider {
     }
 
     @Override
-    public Authentication getAuthentication(HttpServletRequest request) {
+    public Authentication getAuthentication(HttpServletRequest request)
+    {
         Claims claims = extractClaims(request);
 
-        if (claims == null) {
+        if (claims == null)
+        {
             return null;
         }
+
         String username = claims.getSubject();
         Long userId = claims.get("userId", Long.class);
 
@@ -70,37 +77,46 @@ public class JwtProviderImpl implements JwtProvider {
                 .id(userId)
                 .build();
 
-        if(username == null){
+        if (username == null)
+        {
             return null;
         }
         return new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
     }
 
-    private Claims extractClaims(HttpServletRequest request) {
-
-        String token = SecurityUtils.extractAuthTokenFromRequest(request);
-        if (token == null) {
-            return null;
-        }
-
-        Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
-        return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJwt(token)
-                .getBody();
-    }
-
     @Override
-    public boolean isTokenValid(HttpServletRequest request) {
-
+    public boolean isTokenValid(HttpServletRequest request)
+    {
         Claims claims = extractClaims(request);
-        if (claims == null) {
+
+        if (claims == null)
+        {
             return false;
         }
-        if (claims.getExpiration().before(new Date())) {
+
+        if (claims.getExpiration().before(new Date()))
+        {
             return false;
         }
         return true;
+    }
+
+    private Claims extractClaims(HttpServletRequest request)
+    {
+        String token = SecurityUtils.extractAuthTokenFromRequest(request);
+
+        if (token == null)
+        {
+            return null;
+        }
+
+
+        Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
+
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 }
