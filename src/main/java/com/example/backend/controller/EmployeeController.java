@@ -45,23 +45,17 @@ public class EmployeeController {
     //http://localhost:8080/api/employees/6
     }
 
+    @PutMapping("employees/{id}")
+    public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Employee employee){
+        return employeeService.updateEmployee(id, employee);
+    }
 
 
-
-
-
-
-
+//testing delete afterwards
     @GetMapping("/hello")
     public String sayHello(){
         return "Hello from a secure url";
     }
-
-//    @GetMapping("/Employees")
-//    public ResponseEntity<List<Employee>> getEmployees(){
-//        List<Employee> employees = employeeService.findAllEmployees();
-//        return new ResponseEntity<>(employees, HttpStatus.OK);
-//    }
 
 
 
