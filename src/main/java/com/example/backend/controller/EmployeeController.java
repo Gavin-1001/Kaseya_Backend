@@ -30,6 +30,7 @@ public class EmployeeController {
     @GetMapping("employees")
     public ResponseEntity<?> findAllUsers(){
         return ResponseEntity.ok(employeeService.findAllUsers());
+        //http://localhost:8080/api/employees
     }
 
     @PostMapping("employees")
@@ -41,7 +42,7 @@ public class EmployeeController {
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.OK);
-
+    //http://localhost:8080/api/employees/6
     }
 
 
