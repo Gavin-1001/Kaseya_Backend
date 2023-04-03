@@ -3,11 +3,13 @@ package com.example.backend.service.emoployeeService;
 
 import com.example.backend.entity.Employee;
 import com.example.backend.repository.EmployeeRepository;
+import org.hibernate.id.GUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -20,10 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
-    @Override
-    public Employee addEmployee(Employee employee) {
-        return employeeRepository.save(employee);
-    }
+
 
     @Override
     public List<Employee> findAllUsers() {
@@ -75,6 +74,12 @@ public class EmployeeServiceImpl implements EmployeeService {
                 updateEmployee.setEmployeeAge(employee.getEmployeeAge());
             }
         return employeeRepository.save(updateEmployee);
+    }
+
+    @Override
+    public Employee addEmployee(Employee employee) {
+        //employee.setId(Long.valueOf(UUID.randomUUID().toString()));
+        return employeeRepository.save(employee);
     }
 
 

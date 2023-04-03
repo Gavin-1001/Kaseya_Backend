@@ -27,6 +27,7 @@ public class EmployeeController {
 //    }
 
 
+
     @GetMapping("employees")
     public ResponseEntity<?> findAllUsers(){
         return ResponseEntity.ok(employeeService.findAllUsers());
@@ -34,7 +35,7 @@ public class EmployeeController {
     }
 
     @PostMapping("employees")
-    public ResponseEntity<?> addEmployee(Employee employee){
+    public ResponseEntity<?> addEmployee(@RequestBody Employee employee){
         return ResponseEntity.ok(employeeService.addEmployee(employee));
     }
 
@@ -50,16 +51,5 @@ public class EmployeeController {
         return employeeService.updateEmployee(id, employee);
         //http://localhost:8080/api/employees/2
     }
-
-
-//testing delete afterwards
-    @GetMapping("/hello")
-    public String sayHello(){
-        return "Hello from a secure url";
-    }
-
-
-
-
 
 }
