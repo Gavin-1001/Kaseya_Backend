@@ -18,6 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Arrays;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -72,8 +74,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             public void addCorsMappings(CorsRegistry registry)
             {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
-                        .allowedMethods("*");
+                        .allowedOrigins("http://localhost:3000")
+                        //.allowedMethods("*")
+
+                        //test for react app cors issue
+                        .allowCredentials(true)
+                        .allowedHeaders("content-type")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE");
+
             }
         };
     }

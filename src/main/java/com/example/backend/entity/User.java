@@ -3,6 +3,7 @@ package com.example.backend.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -11,7 +12,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; //need to implement UUID
 
     @Column(name = "username", unique = true, nullable = false, length = 100)
     private String username;

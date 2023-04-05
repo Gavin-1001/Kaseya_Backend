@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin()
 public class EmployeeController {
 
     @Autowired
@@ -19,13 +19,6 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-
-//    @PostMapping("/employees") //create employee
-//    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee)  {
-//        Employee newEmployee = employeeService.addEmployee(employee);
-//        return new ResponseEntity<>(newEmployee, HttpStatus.OK);
-//    }
-
 
 
     @GetMapping("employees")
@@ -37,6 +30,7 @@ public class EmployeeController {
     @PostMapping("employees")
     public ResponseEntity<?> addEmployee(@RequestBody Employee employee){
         return ResponseEntity.ok(employeeService.addEmployee(employee));
+        //http://localhost:8080/api/employees
     }
 
     @DeleteMapping("employees/{id}")
