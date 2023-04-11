@@ -1,18 +1,20 @@
 package com.example.backend.entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
-import java.util.UUID;
+
 
 @Entity
 @Data
 @Table(name="users")
 public class User {
 
+    //todo implement uuid for id's.
+    //todo implement @ManyToOne db for employee to skill level
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; //need to implement UUID
+    private Long id; //need to implement Long
 
     @Column(name = "username", unique = true, nullable = false, length = 100)
     private String username;
