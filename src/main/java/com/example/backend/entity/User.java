@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class User {
 
     //todo implement uuid for id's.
-    //todo implement @ManyToOne db for employee to skill level
+    //todo implement @ManyToOne db for employee to skillsLevel
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
