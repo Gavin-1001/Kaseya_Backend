@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Table(name="users")
 public class User {
 
-    //todo implement uuid for id's.
     //todo implement @ManyToOne db for employee to skillsLevel
 
 //    @Id
