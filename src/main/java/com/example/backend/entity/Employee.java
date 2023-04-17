@@ -36,12 +36,20 @@ public class Employee {
 
     @Column()
     private String employeeSkillLevel;
-    //this will be a left join from SkillLevel table in the future, just get the api working for initial testing purposes
+
+    @OneToOne
+    @JoinColumn(name = "skillsLevel")
+    private SkillsLevel employeeSkillsLevel;
 
     @Column()
     private Boolean isActive;
 
     @Column()
     private int employeeAge;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="employee_id", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Employee employee;
+
 
 }

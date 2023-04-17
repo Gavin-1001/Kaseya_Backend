@@ -59,10 +59,10 @@ public class EmployeeServiceImpl implements EmployeeService {
                 updateEmployee.setEmployeeEmailAddress(employee.getEmployeeEmailAddress());
             }
 
-            //skill level
-            if (Objects.nonNull(employee.getEmployeeSkillLevel()) && !"".equalsIgnoreCase(employee.getEmployeeSkillLevel())) {
-                updateEmployee.setEmployeeSkillLevel(employee.getEmployeeSkillLevel());
-            }
+//            //skill level
+//            if (Objects.nonNull(employee.getEmployeeSkillLevel()) && !"".equalsIgnoreCase(employee.getEmployeeSkillLevel())) {
+//                updateEmployee.setEmployeeSkillLevel(employee.getEmployeeSkillLevel());
+//            }
 
             //isActive
             if (Objects.nonNull(employee.getIsActive()) && !"".equalsIgnoreCase(String.valueOf(employee.getIsActive()))) {
