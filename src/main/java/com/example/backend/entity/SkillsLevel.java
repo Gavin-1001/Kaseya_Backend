@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Data
 public class SkillsLevel {
-
+ //Add the controller for skillsLevel and check repo
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String skillLevelId;
