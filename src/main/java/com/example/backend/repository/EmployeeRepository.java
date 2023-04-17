@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, String> {
     @Modifying
     @Transactional
-    void deleteEmployeeById(Long id);
+    void deleteEmployeeById(String id);
 }

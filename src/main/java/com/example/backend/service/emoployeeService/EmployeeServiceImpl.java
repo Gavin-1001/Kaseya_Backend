@@ -30,12 +30,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(Long id) {
+    public void deleteEmployee(String id) {
         employeeRepository.deleteEmployeeById(id);
     }
 
     @Override
-    public Employee updateEmployee(Long id, Employee employee) {
+    public Employee updateEmployee(String id, Employee employee) {
         Employee updateEmployee = employeeRepository.findById(id).get();
 
 

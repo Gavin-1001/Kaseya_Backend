@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface JwtRefreshTokenService {
 
-    JwtRefreshToken createRefreshToken(Long userId);
+    JwtRefreshToken createRefreshToken(String userId);
 
     User generateAccessTokenFromRefreshToken(String refreshTokenId);
 }

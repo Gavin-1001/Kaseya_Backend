@@ -12,9 +12,15 @@ import java.util.UUID;
 @Data
 public class Employee {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id; //need to implement Long
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; //need to implement Long
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name = "id", unique = true)
+    private String id;
+
 
     @Column()
     private String employeeFirstName;

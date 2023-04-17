@@ -17,7 +17,7 @@ import java.util.UUID;
 @Builder
 public class UserPrincipal implements UserDetails
 {
-    private Long id;
+    private String id;
     private String username;
     transient private String password; //don't show up on serialized places.
     transient private User user; //user for only login operation, don't use in JWT.

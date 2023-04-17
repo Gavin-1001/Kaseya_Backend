@@ -33,7 +33,7 @@ public class JwtRefreshTokenServiceImpl implements JwtRefreshTokenService {
 
 
     @Override
-    public JwtRefreshToken createRefreshToken(Long userId) {
+    public JwtRefreshToken createRefreshToken(String userId) {
         JwtRefreshToken jwtRefreshToken = new JwtRefreshToken();
         jwtRefreshToken.setTokenId(UUID.randomUUID().toString());
         jwtRefreshToken.setUserId(userId);
