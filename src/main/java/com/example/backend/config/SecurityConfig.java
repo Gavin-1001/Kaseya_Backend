@@ -1,10 +1,12 @@
 package com.example.backend.config;
 
+import com.example.backend.entity.Role;
 import com.example.backend.security.CustomUserDetailsService;
 import com.example.backend.security.jwt.JwtAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -41,7 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/api/authentication/**").permitAll()//login and register pre-path
-                //.antMatchers("/api/admin/**").hasRole(Role.ADMIN.name())
+                // .antMatchers(HttpMethod.GET, "/api/employees").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/employees/**").permitAll() //put back to the one above if this doesn't work
+                .antMatchers(HttpMethod.POST, "/api/employees/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/skills/**").permitAll()
+                //.antMatchers("/api/employees/**").hasRole(Role.USER.name()) //put this back too
+                .antMatchers("/api/employees/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -64,24 +71,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
+    //
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer()
+//    {
+//        return new WebMvcConfigurer()
+//        {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry)
+//            {
+//                registry.addMapping("/**")
+//                        .allowedOrigins("http://localhost:3000")
+//                        //.allowedMethods("*")
+//
+//                        //test for react app cors issue
+//                        .allowCredentials(true)
+//                        .allowedHeaders("content-type")
+//                        .allowedMethods("GET", "POST", "PUT", "DELETE");
+//
+//            }
+//        };
+//    }
+//this one works
     @Bean
-    public WebMvcConfigurer corsConfigurer()
-    {
-        return new WebMvcConfigurer()
-        {
+    public WebMvcConfigurer corsConfigurer(){
+        return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(CorsRegistry registry)
-            {
+            public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000")
-                        //.allowedMethods("*")
-
-                        //test for react app cors issue
-                        .allowCredentials(true)
-                        .allowedHeaders("content-type")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE");
-
+                        .allowedOrigins("*")
+                        .allowedMethods("*");
             }
         };
     }
