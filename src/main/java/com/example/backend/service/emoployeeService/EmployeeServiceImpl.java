@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
+
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -30,12 +30,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(Long id) {
+    public void deleteEmployee(String id) {
         employeeRepository.deleteEmployeeById(id);
     }
 
     @Override
-    public Employee updateEmployee(Long id, Employee employee) {
+    public Employee updateEmployee(String id, Employee employee) {
         Employee updateEmployee = employeeRepository.findById(id).get();
 
 
@@ -59,10 +59,10 @@ public class EmployeeServiceImpl implements EmployeeService {
                 updateEmployee.setEmployeeEmailAddress(employee.getEmployeeEmailAddress());
             }
 
-            //skill level
-            if (Objects.nonNull(employee.getEmployeeSkillLevel()) && !"".equalsIgnoreCase(employee.getEmployeeSkillLevel())) {
-                updateEmployee.setEmployeeSkillLevel(employee.getEmployeeSkillLevel());
-            }
+//            //skill level
+//            if (Objects.nonNull(employee.getEmployeeSkillLevel()) && !"".equalsIgnoreCase(employee.getEmployeeSkillLevel())) {
+//                updateEmployee.setEmployeeSkillLevel(employee.getEmployeeSkillLevel());
+//            }
 
             //isActive
             if (Objects.nonNull(employee.getIsActive()) && !"".equalsIgnoreCase(String.valueOf(employee.getIsActive()))) {
@@ -79,6 +79,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee addEmployee(Employee employee) {
         //employee.setId(Long.valueOf(UUID.randomUUID().toString()));
+
         return employeeRepository.save(employee);
     }
 

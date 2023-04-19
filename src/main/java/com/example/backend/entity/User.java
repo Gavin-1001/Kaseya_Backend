@@ -1,18 +1,27 @@
 package com.example.backend.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.UUID;
+
 
 @Entity
 @Data
 @Table(name="users")
 public class User {
 
+    //todo implement @ManyToOne db for employee to skillsLevel
+
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id; //need to implement Long
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; //need to implement UUID
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name = "id", unique = true)
+    private String id;
 
     @Column(name = "username", unique = true, nullable = false, length = 100)
     private String username;
@@ -31,7 +40,7 @@ public class User {
     private Role role;
 
 
-    public User(Long id, String username, String password) {
+    public User(String id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;

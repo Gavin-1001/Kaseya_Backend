@@ -16,7 +16,7 @@ public class JwtRefreshToken {
     private String tokenId;
 
     @Column(name="user_id")
-    private Long userId;
+    private String userId;
 
     @Column(name="created_token_date")
     private LocalDateTime whenTokenCreated;

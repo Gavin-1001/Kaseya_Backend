@@ -6,11 +6,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, String> {
     @Modifying
     @Transactional
-    void deleteEmployeeById(Long id);
+    void deleteEmployeeById(String id);
 }
