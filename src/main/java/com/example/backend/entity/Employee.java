@@ -1,20 +1,22 @@
 package com.example.backend.entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Employee {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id; //need to implement Long
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
@@ -35,21 +37,14 @@ public class Employee {
     private String employeeEmailAddress;
 
     @Column()
-    private String employeeSkillLevel;
-
-    @OneToOne
-    @JoinColumn(name = "skillsLevel")
-    private SkillsLevel employeeSkillsLevel;
-
-    @Column()
     private Boolean isActive;
 
     @Column()
     private int employeeAge;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="employee_id", referencedColumnName = "id", insertable = false, updatable = false)
-//    private Employee employee;
+    @OneToMany(targetEntity = Skills.class, cascade = CascadeType.ALL)
+    @JoinColumn(name="Employee_fk", referencedColumnName = "id")
+    private List<Skills> skills;
 
 
 }

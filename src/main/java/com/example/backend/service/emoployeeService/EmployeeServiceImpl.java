@@ -3,9 +3,10 @@ package com.example.backend.service.emoployeeService;
 
 import com.example.backend.entity.Employee;
 import com.example.backend.repository.EmployeeRepository;
-import org.hibernate.id.GUIDGenerator;
+import com.example.backend.requests.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Objects;
@@ -76,11 +77,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(updateEmployee);
     }
 
-    @Override
-    public Employee addEmployee(Employee employee) {
-        //employee.setId(Long.valueOf(UUID.randomUUID().toString()));
+//    @Override
+//    public Employee addEmployee(@RequestBody Employee employee) {
+//        return employeeRepository.save(employee);
+//    }
 
-        return employeeRepository.save(employee);
+    @Override
+    public Employee addTestEmployee(Request request) {
+        return employeeRepository.save(request.getEmployee());
+    }
+
+    @Override
+    public Employee addEmployee(Request request) {
+        return employeeRepository.save(request.getEmployee());
     }
 
 

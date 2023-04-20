@@ -1,13 +1,12 @@
 package com.example.backend.controller;
 
 import com.example.backend.entity.Employee;
+import com.example.backend.requests.Request;
 import com.example.backend.service.emoployeeService.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/")
@@ -29,11 +28,6 @@ public class EmployeeController {
         //http://localhost:8080/api/employees
     }
 
-    @PostMapping("employees")
-    public ResponseEntity<?> addEmployee(@RequestBody Employee employee){
-        return ResponseEntity.ok(employeeService.addEmployee(employee));
-        //http://localhost:8080/api/employees
-    }
 
     @DeleteMapping("employees/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") String id) {
@@ -47,5 +41,15 @@ public class EmployeeController {
         return employeeService.updateEmployee(id, employee);
         //http://localhost:8080/api/employees/2
     }
+
+    //http://localhost:8080/api/employees
+    @PostMapping("/employees")
+    public ResponseEntity<?> addEmployee(@RequestBody Request request){
+        return ResponseEntity.ok(employeeService.addTestEmployee(request));
+
+        //json payload for request
+    }
+
+
 
 }
