@@ -8,12 +8,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="employee")
 @Data
 public class Employee {
 
@@ -42,9 +42,10 @@ public class Employee {
     @Column()
     private int employeeAge;
 
-    @OneToMany(targetEntity = Skills.class, cascade = CascadeType.ALL)
-    @JoinColumn(name="Employee_fk", referencedColumnName = "id")
-    private List<Skills> skills;
+//    @OneToMany(targetEntity = Skills.class, cascade = CascadeType.ALL)
+//    @JoinColumn(name="Employee_fk", referencedColumnName = "id")
+//    private List<Skills> skills; // THIS WORKS!!!
+
 
 
 }

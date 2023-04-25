@@ -21,7 +21,10 @@ public interface EmployeeService {
 
     Employee addTestEmployee(Request request);
 
-    Employee addEmployee(Request request);
+
+//   Employee addEmployee(Request request);
+
+    Employee addEmployee(Employee employee);
 }
 
 

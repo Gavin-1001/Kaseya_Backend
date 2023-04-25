@@ -23,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
-
+//test the GET skills endpoint
 
     @Override
     public List<Employee> findAllUsers() {
@@ -77,20 +77,22 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(updateEmployee);
     }
 
-//    @Override
-//    public Employee addEmployee(@RequestBody Employee employee) {
-//        return employeeRepository.save(employee);
-//    }
+    @Override
+    public Employee addEmployee(@RequestBody Employee employee) {
+        return employeeRepository.save(employee);
+    }
 
     @Override
     public Employee addTestEmployee(Request request) {
         return employeeRepository.save(request.getEmployee());
     }
 
-    @Override
-    public Employee addEmployee(Request request) {
-        return employeeRepository.save(request.getEmployee());
-    }
+
+//    @Override
+//    public Employee addEmployee(Request request) {
+//
+//        return employeeRepository.save(request.getEmployee());
+//    }
 
 
 }

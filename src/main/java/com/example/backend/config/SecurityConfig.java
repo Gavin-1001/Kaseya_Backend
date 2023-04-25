@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/employees/**").permitAll() //put back to the one above if this doesn't work
                 .antMatchers(HttpMethod.POST, "/api/employees/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/skills/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/**").permitAll()
                 //.antMatchers("/api/employees/**").hasRole(Role.USER.name()) //put this back too
                 .antMatchers("/api/employees/**").permitAll()
@@ -73,37 +74,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
     //
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer()
-//    {
-//        return new WebMvcConfigurer()
-//        {
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry)
-//            {
-//                registry.addMapping("/**")
-//                        .allowedOrigins("http://localhost:3000")
-//                        //.allowedMethods("*")
-//
-//                        //test for react app cors issue
-//                        .allowCredentials(true)
-//                        .allowedHeaders("content-type")
-//                        .allowedMethods("GET", "POST", "PUT", "DELETE");
-//
-//            }
-//        };
-//    }
-//this one works
     @Bean
-    public WebMvcConfigurer corsConfigurer(){
-        return new WebMvcConfigurer() {
+    public WebMvcConfigurer corsConfigurer()
+    {
+        return new WebMvcConfigurer()
+        {
             @Override
-            public void addCorsMappings(CorsRegistry registry) {
+            public void addCorsMappings(CorsRegistry registry)
+            {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
-                        .allowedMethods("*");
+                        .allowedOrigins("http://localhost:3000")
+                        //.allowedMethods("*")
+
+                        //test for react app cors issue
+                        .allowCredentials(true)
+                        .allowedHeaders("content-type")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE");
+
             }
         };
     }
+//this one works
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer(){
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**")
+//                        .allowedOrigins("*")
+//                        .allowedMethods("*");
+//            }
+//        };
+//    }
 
 }

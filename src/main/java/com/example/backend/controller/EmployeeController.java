@@ -28,6 +28,11 @@ public class EmployeeController {
         //http://localhost:8080/api/employees
     }
 
+    @PostMapping("employees")
+    public ResponseEntity<?> addEmployee(@RequestBody Employee employee){
+        return ResponseEntity.ok(employeeService.addEmployee(employee));
+        //http://localhost:8080/api/employees
+    }
 
     @DeleteMapping("employees/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") String id) {
@@ -42,13 +47,11 @@ public class EmployeeController {
         //http://localhost:8080/api/employees/2
     }
 
-    //http://localhost:8080/api/employees
-    @PostMapping("/employees")
-    public ResponseEntity<?> addEmployee(@RequestBody Request request){
-        return ResponseEntity.ok(employeeService.addTestEmployee(request));
-
-        //json payload for request
-    }
+    //this is the old "TEST" controller, check EmployeeSave
+//    @PostMapping("/employees")
+//    public ResponseEntity<?> addEmployee(@RequestBody Request request){
+//        return ResponseEntity.ok(employeeService.addTestEmployee(request));
+//    }
 
 
 

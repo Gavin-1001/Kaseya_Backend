@@ -20,4 +20,14 @@ public class SkillsController {
         return ResponseEntity.ok(skillService.addSkill(skills));
     }
 
+    @GetMapping("getSkills")
+    public ResponseEntity<?> getAllSkills(){
+        return ResponseEntity.ok(skillService.getAllSkills());
+    }
+
+    @GetMapping("getSkillById/{id}")
+    public ResponseEntity<?> getSkillById(@PathVariable Long id){
+        return ResponseEntity.ok(skillService.getSkillById(id));
+    }
+
 }

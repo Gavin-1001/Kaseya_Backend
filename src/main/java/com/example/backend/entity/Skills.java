@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,9 +23,15 @@ public class Skills {
 
     private String skillDescription;
 
-//    @OneToOne(mappedBy = "skills")
+// ERROR: mappedBy reference an unknown target entity property: com.example.backend.entity.Employee.employee in com.example.backend.entity.Skills.employee
+//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Employee.class, orphanRemoval=true)
+//    private List<Employee> employee;
+
+
+//this works but is commented out
+//    @ManyToOne()
 //    private Employee employee;
-//unifd
+
 
 //put a relationship later back to employee
 //    @ManyToOne()
