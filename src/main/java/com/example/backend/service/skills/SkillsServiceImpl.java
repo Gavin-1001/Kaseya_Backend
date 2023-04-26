@@ -28,7 +28,10 @@ public class SkillsServiceImpl implements SkillsService {
         return skillsRepository.findById(id).orElse(null);
     }
 
-
+    @Override
+    public void deleteSkill(Long id) {
+        skillsRepository.deleteSkillById(id);
+    }
 
 
 }

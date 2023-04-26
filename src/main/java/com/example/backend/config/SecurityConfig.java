@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/**").permitAll()
                 //.antMatchers("/api/employees/**").hasRole(Role.USER.name()) //put this back too
                 .antMatchers("/api/employees/**").permitAll()
+                .antMatchers("/api/skills/**").permitAll() //allows crud from skills
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

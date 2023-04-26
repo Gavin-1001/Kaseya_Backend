@@ -10,4 +10,7 @@ public interface SkillsService {
     List<Skills> getAllSkills();
 
     Skills getSkillById(Long id);
+
+
+    void deleteSkill(Long id);
 }
