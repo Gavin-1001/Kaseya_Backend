@@ -79,6 +79,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee addEmployee(@RequestBody Employee employee) {
+        //to convert the employeeId from a String to a long
+        //long l = Long.parseLong(employee.getId());
+        //employee.setId();
         return employeeRepository.save(employee);
     }
 
