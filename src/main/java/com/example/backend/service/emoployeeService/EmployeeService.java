@@ -2,6 +2,7 @@ package com.example.backend.service.emoployeeService;
 
 
 import com.example.backend.entity.Employee;
+import com.example.backend.requests.EmployeeDto;
 import com.example.backend.requests.Request;
 
 
@@ -24,7 +25,7 @@ public interface EmployeeService {
 
 //   Employee addEmployee(Request request);
 
-    Employee addEmployee(Employee employee);
+    Employee addEmployee(EmployeeDto employeeRequest);
 }
 
 

@@ -22,19 +22,11 @@ public class Skills {
     private String skillName;
 
     private String skillDescription;
-
-// ERROR: mappedBy reference an unknown target entity property: com.example.backend.entity.Employee.employee in com.example.backend.entity.Skills.employee
-//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Employee.class, orphanRemoval=true)
-//    private List<Employee> employee;
+    
 
 
-//this works but is commented out
-//    @ManyToOne()
-//    private Employee employee;
 
 
-//put a relationship later back to employee
-//    @ManyToOne()
 
 
 

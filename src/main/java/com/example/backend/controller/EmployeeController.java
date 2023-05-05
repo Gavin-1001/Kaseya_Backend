@@ -1,12 +1,15 @@
 package com.example.backend.controller;
 
 import com.example.backend.entity.Employee;
+import com.example.backend.requests.EmployeeDto;
 import com.example.backend.requests.Request;
 import com.example.backend.service.emoployeeService.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/")
@@ -28,9 +31,15 @@ public class EmployeeController {
         //http://localhost:8080/api/employees
     }
 
+//    @PostMapping("employees")
+//    public ResponseEntity<?> addEmployee(@Valid @RequestBody Employee employee){
+//        return ResponseEntity.ok(employeeService.addEmployee(employee));
+//        //http://localhost:8080/api/employees
+//    }
+
     @PostMapping("employees")
-    public ResponseEntity<?> addEmployee(@RequestBody Employee employee){
-        return ResponseEntity.ok(employeeService.addEmployee(employee));
+    public ResponseEntity<Employee> addEmployee( @RequestBody @Valid EmployeeDto employeeRequest){
+        return new ResponseEntity<>(employeeService.addEmployee(employeeRequest), HttpStatus.CREATED);
         //http://localhost:8080/api/employees
     }
 
@@ -46,13 +55,6 @@ public class EmployeeController {
         return employeeService.updateEmployee(id, employee);
         //http://localhost:8080/api/employees/2
     }
-
-    //this is the old "TEST" controller, check EmployeeSave
-//    @PostMapping("/employees")
-//    public ResponseEntity<?> addEmployee(@RequestBody Request request){
-//        return ResponseEntity.ok(employeeService.addTestEmployee(request));
-//    }
-
 
 
 }

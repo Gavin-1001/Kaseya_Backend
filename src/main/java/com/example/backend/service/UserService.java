@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.entity.User;
+import com.example.backend.requests.UserDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +10,7 @@ import java.util.Optional;
 public interface UserService{
 
 
-    User saveUser(User user);
+    User saveUser(UserDto userRequest);
 
     Optional<User> findByUsername(String username);
 

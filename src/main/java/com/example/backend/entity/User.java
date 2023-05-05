@@ -1,6 +1,9 @@
 package com.example.backend.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,6 +12,8 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name="users")
+@Builder
+@AllArgsConstructor
 public class User {
 
     //todo implement @ManyToOne db for employee to skillsLevel
@@ -40,10 +45,12 @@ public class User {
     private Role role;
 
 
+
     public User(String id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
+        setRole(Role.USER);
     }
 
     public User() {

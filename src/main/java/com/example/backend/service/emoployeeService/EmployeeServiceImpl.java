@@ -3,7 +3,10 @@ package com.example.backend.service.emoployeeService;
 
 import com.example.backend.entity.Employee;
 import com.example.backend.repository.EmployeeRepository;
+import com.example.backend.requests.EmployeeDto;
 import com.example.backend.requests.Request;
+import lombok.Builder;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +16,8 @@ import java.util.Objects;
 
 
 @Service
+@Builder
+@Data
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
@@ -60,10 +65,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 updateEmployee.setEmployeeEmailAddress(employee.getEmployeeEmailAddress());
             }
 
-//            //skill level
-//            if (Objects.nonNull(employee.getEmployeeSkillLevel()) && !"".equalsIgnoreCase(employee.getEmployeeSkillLevel())) {
-//                updateEmployee.setEmployeeSkillLevel(employee.getEmployeeSkillLevel());
-//            }
 
             //isActive
             if (Objects.nonNull(employee.getIsActive()) && !"".equalsIgnoreCase(String.valueOf(employee.getIsActive()))) {
@@ -78,10 +79,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee addEmployee(@RequestBody Employee employee) {
-        //to convert the employeeId from a String to a long
-        //long l = Long.parseLong(employee.getId());
-        //employee.setId();
+    public Employee addEmployee(@RequestBody EmployeeDto employeeRequest) {
+        Employee employee = Employee.builder()
+                .employeeFirstName(employeeRequest.getEmployeeFirstName())
+                .employeeLastName(employeeRequest.getEmployeeLastName())
+                .employeeEmailAddress(employeeRequest.getEmployeeEmailAddress())
+                .employeeDateOfBirth(employeeRequest.getEmployeeDateOfBirth())
+                .isActive(employeeRequest.getIsActive())
+                .employeeAge(employeeRequest.getEmployeeAge())
+                .build();
         return employeeRepository.save(employee);
     }
 
@@ -89,13 +95,5 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee addTestEmployee(Request request) {
         return employeeRepository.save(request.getEmployee());
     }
-
-
-//    @Override
-//    public Employee addEmployee(Request request) {
-//
-//        return employeeRepository.save(request.getEmployee());
-//    }
-
 
 }

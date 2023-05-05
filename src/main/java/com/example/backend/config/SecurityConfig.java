@@ -97,7 +97,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             }
         };
     }
-//this one works
+//this one works too
 //    @Bean
 //    public WebMvcConfigurer corsConfigurer(){
 //        return new WebMvcConfigurer() {
