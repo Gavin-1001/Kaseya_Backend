@@ -33,23 +33,23 @@ public class AuthenticationController {
    @Autowired
    private JwtRefreshTokenService jwtRefreshTokenService;
 
-//    @PostMapping("/register")
-//    public ResponseEntity<?> signUp(@RequestBody User user) throws UsernameExistsException {
-//        if (userService.findByUsername(user.getUsername()).isPresent())  {
-//            return new ResponseEntity<>(HttpStatus.CONFLICT);
-//
-//        }
-//        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
-//    }
-
-
     @PostMapping("/register")
-    public ResponseEntity<?> signUp(@RequestBody @Valid UserDto userRequest){
-        if (userService.findByUsername(userRequest.getUsername()).isPresent())  {
+    public ResponseEntity<?> signUp(@RequestBody User user) throws UsernameExistsException {
+        if (userService.findByUsername(user.getUsername()).isPresent())  {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
+
         }
-        return new ResponseEntity<>(userService.saveUser(userRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
+
+
+//    @PostMapping("/register")
+//    public ResponseEntity<?> signUp(@RequestBody @Valid UserDto userRequest){
+//        if (userService.findByUsername(userRequest.getUsername()).isPresent())  {
+//            return new ResponseEntity<>(HttpStatus.CONFLICT);
+//        }
+//        return new ResponseEntity<>(userService.saveUser(userRequest), HttpStatus.CREATED);
+//    }
 
 
     @PostMapping("/signin")

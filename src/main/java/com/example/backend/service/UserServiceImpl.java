@@ -28,28 +28,29 @@ public class UserServiceImpl implements UserService{
     private PasswordEncoder passwordEncoder;
 
 
-    @Override
-    public User saveUser(@RequestBody UserDto userRequest) {
-
-        User user = User.builder()
-
-                .username(userRequest.getUsername())
-                .password(userRequest.getPassword())
-                .accessToken(userRequest.getAccessToken())
-                .refreshToken(userRequest.getRefreshToken())
-                .role(userRequest.getRole())
-                .build();
-        return userRepository.save(user);
-    }
-
-
-
 //    @Override
-//    public User saveUser(UserDto userRequest) {
-//        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+//    public User saveUser(@RequestBody User userRequest) {
+//
 //        userRequest.setRole(Role.USER);
-//        return userRepository.save(userRequest);
+//        User user = User.builder()
+//
+//                .username(userRequest.getUsername())
+//                .password(userRequest.getPassword())
+//                .accessToken(userRequest.getAccessToken())
+//                .refreshToken(userRequest.getRefreshToken())
+//                .role(userRequest.getRole())
+//                .build();
+//        return userRepository.save(user);
 //    }
+
+
+
+    @Override
+    public User saveUser(User userRequest) {
+        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        userRequest.setRole(Role.USER);
+        return userRepository.save(userRequest);
+    }
 
     @Override
     public Optional<User> findByUsername(String username)

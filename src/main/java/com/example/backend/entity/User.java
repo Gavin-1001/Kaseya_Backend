@@ -1,5 +1,7 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +18,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class User {
 
-    //todo implement @ManyToOne db for employee to skillsLevel
-
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id; //need to implement Long
@@ -31,6 +31,7 @@ public class User {
     @Column(name = "username", unique = true, nullable = false, length = 100)
     private String username;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Transient
