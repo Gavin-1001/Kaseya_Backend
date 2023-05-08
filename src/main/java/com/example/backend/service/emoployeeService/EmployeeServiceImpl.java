@@ -8,7 +8,9 @@ import com.example.backend.requests.Request;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -78,17 +80,27 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(updateEmployee);
     }
 
-    @Override
-    public Employee addEmployee(@RequestBody EmployeeDto employeeRequest) {
-        Employee employee = Employee.builder()
-                .employeeFirstName(employeeRequest.getEmployeeFirstName())
-                .employeeLastName(employeeRequest.getEmployeeLastName())
-                .employeeEmailAddress(employeeRequest.getEmployeeEmailAddress())
-                .employeeDateOfBirth(employeeRequest.getEmployeeDateOfBirth())
-                .isActive(employeeRequest.getIsActive())
-                .employeeAge(employeeRequest.getEmployeeAge())
-                .build();
-        return employeeRepository.save(employee);
+
+//    @Override
+//    public Employee addEmloyee(@RequestBody EmployeeDto employeeRequest) {
+//        Employee employee = Employee.builder()
+//                .employeeFirstName(employeeRequest.getEmployeeFirstName())
+//                .employeeLastName(employeeRequest.getEmployeeLastName())
+//                .employeeEmailAddress(employeeRequest.getEmployeeEmailAddress())
+//                .employeeDateOfBirth(employeeRequest.getEmployeeDateOfBirth())
+//                .isActive(employeeRequest.getIsActive())
+//                .employeeAge(employeeRequest.getEmployeeAge())
+//                .build();
+//        return employeeRepository.save(employee);
+//    }
+
+
+    @PostMapping("employees")
+    public ResponseEntity<?> addEmployee(@RequestBody List<Employee> employee){
+
+        employeeRepository.saveAll(employee);
+        return ResponseEntity.ok("DONE");
+        //http://localhost:8080/api/employees
     }
 
     @Override

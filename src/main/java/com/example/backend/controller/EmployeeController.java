@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.entity.Employee;
+import com.example.backend.repository.EmployeeRepository;
 import com.example.backend.requests.EmployeeDto;
 import com.example.backend.requests.Request;
 import com.example.backend.service.emoployeeService.EmployeeService;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/")
@@ -19,9 +21,13 @@ public class EmployeeController {
     @Autowired
     private final EmployeeService employeeService;
 
+    @Autowired
+    private final EmployeeRepository employeeRepository;
 
-    public EmployeeController(EmployeeService employeeService) {
+
+    public EmployeeController(EmployeeService employeeService, EmployeeRepository employeeRepository) {
         this.employeeService = employeeService;
+        this.employeeRepository = employeeRepository;
     }
 
 
@@ -31,17 +37,17 @@ public class EmployeeController {
         //http://localhost:8080/api/employees
     }
 
-//    @PostMapping("employees")
-//    public ResponseEntity<?> addEmployee(@Valid @RequestBody Employee employee){
-//        return ResponseEntity.ok(employeeService.addEmployee(employee));
-//        //http://localhost:8080/api/employees
-//    }
-
     @PostMapping("employees")
-    public ResponseEntity<Employee> addEmployee( @RequestBody @Valid EmployeeDto employeeRequest){
-        return new ResponseEntity<>(employeeService.addEmployee(employeeRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> addEmployee(@Valid @RequestBody List<Employee> employee){
+        return ResponseEntity.ok(employeeRepository.saveAll(employee));
         //http://localhost:8080/api/employees
     }
+
+//    @PostMapping("employees")
+//    public ResponseEntity<Employee> addEmployee( @RequestBody @Valid EmployeeDto employeeRequest){
+//        return new ResponseEntity<>(employeeService.addEmployee(employeeRequest), HttpStatus.CREATED);
+//        //http://localhost:8080/api/employees
+//    }
 
     @DeleteMapping("employees/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") String id) {

@@ -16,19 +16,16 @@ public class Skills {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private Long id;
 
     private String skillName;
 
     private String skillDescription;
-    
 
 
-
-
-
-
+    @OneToOne(mappedBy = "skills")
+    private Employee employee;
 
 
 }

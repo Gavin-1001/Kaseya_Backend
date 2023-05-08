@@ -18,14 +18,13 @@ public interface EmployeeService {
 
     Employee updateEmployee(String id, Employee employee);
 
-//    Employee addEmployee(Employee employee);
 
     Employee addTestEmployee(Request request);
 
 
 //   Employee addEmployee(Request request);
 
-    Employee addEmployee(EmployeeDto employeeRequest);
+    //Employee addEmployee(EmployeeDto employeeRequest); use this one
 }
 
 

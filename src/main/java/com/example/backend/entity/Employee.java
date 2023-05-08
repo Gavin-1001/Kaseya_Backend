@@ -51,5 +51,11 @@ public class Employee {
 //    private List<Skills> skills; // THIS WORKS!!!
 
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "skills_id")
+    private Skills skills;
+
+
+
 
 }
