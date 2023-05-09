@@ -95,13 +95,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 //    }
 
 
-    @PostMapping("employees")
-    public ResponseEntity<?> addEmployee(@RequestBody List<Employee> employee){
 
-        employeeRepository.saveAll(employee);
-        return ResponseEntity.ok("DONE");
-        //http://localhost:8080/api/employees
-    }
 
     @Override
     public Employee addTestEmployee(Request request) {

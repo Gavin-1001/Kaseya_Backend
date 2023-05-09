@@ -4,6 +4,9 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
@@ -19,13 +22,11 @@ public class Skills {
     @Column(name = "id")
     private Long id;
 
+    //@NotBlank(message = "SKILL NAME CANNOT BE BLANK")
+    @NotEmpty(message = "Skill Name cannot be empty!!!")
     private String skillName;
 
+    @NotEmpty(message = "Skill Description cannot be empty!!!")
     private String skillDescription;
-
-
-    @OneToOne(mappedBy = "skills")
-    private Employee employee;
-
 
 }

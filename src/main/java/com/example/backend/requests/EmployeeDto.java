@@ -1,5 +1,6 @@
 package com.example.backend.requests;
 
+import com.example.backend.entity.Skills;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,4 +35,5 @@ public class EmployeeDto {
     @Min(value = 1, message = "Invalid Age: Equals to zero or Less than zero")
     @Max(value = 100, message = "Age not above 100")
     int employeeAge;
+
 }
