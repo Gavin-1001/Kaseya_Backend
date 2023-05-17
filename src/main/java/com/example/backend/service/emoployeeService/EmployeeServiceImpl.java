@@ -2,16 +2,14 @@ package com.example.backend.service.emoployeeService;
 
 
 import com.example.backend.entity.Employee;
+import com.example.backend.entity.Skills;
 import com.example.backend.repository.EmployeeRepository;
 import com.example.backend.requests.EmployeeDto;
 import com.example.backend.requests.Request;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Objects;
@@ -47,36 +45,47 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee updateEmployee = employeeRepository.findById(id).get();
 
 
-            //first name
-            if (Objects.nonNull(employee.getEmployeeFirstName()) && !"".equalsIgnoreCase(employee.getEmployeeFirstName())) {
-                updateEmployee.setEmployeeFirstName(employee.getEmployeeFirstName());
-            }
+        //first name
+        if (Objects.nonNull(employee.getEmployeeFirstName()) && !"".equalsIgnoreCase(employee.getEmployeeFirstName())) {
+            updateEmployee.setEmployeeFirstName(employee.getEmployeeFirstName());
+        }
 
-            //last name
-            if (Objects.nonNull(employee.getEmployeeLastName()) && !"".equalsIgnoreCase(employee.getEmployeeLastName())) {
-                updateEmployee.setEmployeeLastName(employee.getEmployeeLastName());
-            }
+        //last name
+        if (Objects.nonNull(employee.getEmployeeLastName()) && !"".equalsIgnoreCase(employee.getEmployeeLastName())) {
+            updateEmployee.setEmployeeLastName(employee.getEmployeeLastName());
+        }
 
-            //date of birth
-            if (Objects.nonNull(employee.getEmployeeDateOfBirth()) && !"".equalsIgnoreCase(String.valueOf(employee.getEmployeeDateOfBirth()))) {
-                updateEmployee.setEmployeeDateOfBirth(employee.getEmployeeDateOfBirth());
-            }
+        //date of birth
+        if (Objects.nonNull(employee.getEmployeeDateOfBirth()) && !"".equalsIgnoreCase(String.valueOf(employee.getEmployeeDateOfBirth()))) {
+            updateEmployee.setEmployeeDateOfBirth(employee.getEmployeeDateOfBirth());
+        }
 
-            //email address
-            if (Objects.nonNull(employee.getEmployeeEmailAddress()) && !"".equalsIgnoreCase(String.valueOf(employee.getEmployeeEmailAddress()))) {
-                updateEmployee.setEmployeeEmailAddress(employee.getEmployeeEmailAddress());
-            }
+        //email address
+        if (Objects.nonNull(employee.getEmployeeEmailAddress()) && !"".equalsIgnoreCase(String.valueOf(employee.getEmployeeEmailAddress()))) {
+            updateEmployee.setEmployeeEmailAddress(employee.getEmployeeEmailAddress());
+        }
 
 
-            //isActive
-            if (Objects.nonNull(employee.getIsActive()) && !"".equalsIgnoreCase(String.valueOf(employee.getIsActive()))) {
-                updateEmployee.setIsActive(employee.getIsActive());
-            }
+        //isActive
+        if (Objects.nonNull(employee.getIsActive()) && !"".equalsIgnoreCase(String.valueOf(employee.getIsActive()))) {
+            updateEmployee.setIsActive(employee.getIsActive());
+        }
 
-            //employeeAge
-            if (Objects.nonNull(employee.getEmployeeAge()) && !"".equalsIgnoreCase(String.valueOf(employee.getEmployeeAge()))) {
-                updateEmployee.setEmployeeAge(employee.getEmployeeAge());
-            }
+        //skillName
+        if (Objects.nonNull(employee.getSkills().getSkillName()) && !"".equalsIgnoreCase(employee.getSkills().getSkillName())) {
+            //updateEmployee.setIsActive(employee.getIsActive());
+            updateEmployee.setSkills(employee.getSkills());
+        }
+
+        //skillDescription
+        if (Objects.nonNull(employee.getSkills().getSkillDescription()) && !"".equalsIgnoreCase(employee.getSkills().getSkillDescription())) {
+            updateEmployee.setSkills(employee.getSkills());
+        }
+
+        //employeeAge
+        if (Objects.nonNull(employee.getEmployeeAge()) && !"".equalsIgnoreCase(String.valueOf(employee.getEmployeeAge()))) {
+            updateEmployee.setEmployeeAge(employee.getEmployeeAge());
+        }
         return employeeRepository.save(updateEmployee);
     }
 
@@ -95,11 +104,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 //    }
 
 
-
-
     @Override
     public Employee addTestEmployee(Request request) {
         return employeeRepository.save(request.getEmployee());
+    }
+
+    @Override
+    public Employee addEmployeeTest(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    @Override
+    public Employee saveEmployee(EmployeeDto userRequest) {
+            Employee user = Employee.builder()
+                    .employeeFirstName(userRequest.getEmployeeFirstName())
+                    .employeeLastName(userRequest.getEmployeeLastName())
+                    .employeeEmailAddress(userRequest.getEmployeeEmailAddress())
+                    .employeeAge(userRequest.getEmployeeAge())
+                    .isActive(userRequest.getIsActive())
+                    .build();
+            return employeeRepository.save(user);
     }
 
 }

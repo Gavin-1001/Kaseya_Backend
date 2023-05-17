@@ -50,6 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/**").permitAll()
                 .antMatchers(HttpMethod.POST, "api/addSkillToEmployee/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/employees/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/**").permitAll()
                 //.antMatchers("/api/employees/**").hasRole(Role.USER.name()) //put this back too
                 .antMatchers("/api/employees/**").permitAll()
                 .antMatchers("/api/skills/**").permitAll() //allows crud from skills

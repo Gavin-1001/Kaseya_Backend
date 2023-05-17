@@ -1,13 +1,17 @@
 package com.example.backend.entity;
 
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.util.Date;
 
@@ -15,9 +19,11 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name="employee")
 @Data
 @Builder
+
 public class Employee {
 
     @Id
@@ -26,23 +32,16 @@ public class Employee {
     @Column(name = "id", unique = true)
     private String id;
 
-
-    @Column()
     private String employeeFirstName;
 
-    @Column()
     private String employeeLastName;
 
-    @Column
     private Date employeeDateOfBirth;
 
-    @Column()
     private String employeeEmailAddress;
 
-    @Column()
     private Boolean isActive;
 
-    @Column()
     private int employeeAge;
 
 //    @OneToMany(targetEntity = Skills.class, cascade = CascadeType.ALL)

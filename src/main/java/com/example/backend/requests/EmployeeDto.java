@@ -13,27 +13,29 @@ import java.util.Date;
 public class EmployeeDto {
 
     @NotBlank(message = "First Name cannot be blank")
-    @NotNull(message = "First Name cannot be NULL")
     String employeeFirstName;
 
-    @NotBlank(message = "Last Name cannot be BLANK")
-    @NotNull(message = "Last Name cannot be NULL")
+    @NotBlank(message = "Last Name cannot be blank")
     String employeeLastName;
 
-    @NotNull(message = "Date cannot be null")
+    @NotNull(message = "Date of Birth cannot be null")
     Date employeeDateOfBirth;
 
-    @NotBlank(message = "Email Address cannot be BLANK")
-    @NotNull(message = "Email Address cannot be NULL")
-    @Email(message = "This must be a valid email")
+    @NotBlank(message = "email address cannot be blank")
     String employeeEmailAddress;
 
-    @NotNull(message = "Employee Active cannot be null")
+    @NotNull(message = "isActive cannot be null")
     Boolean isActive;
 
+    @NotNull(message = "age cannot be null")
+   int employeeAge;
 
-    @Min(value = 1, message = "Invalid Age: Equals to zero or Less than zero")
-    @Max(value = 100, message = "Age not above 100")
-    int employeeAge;
+    //private Skills skills[private Skills skillName];
+
+//    @NotBlank(message = "skillName cannot be blank")
+//    private Skills skillName;
+//
+//    @NotBlank(message = "skillDesc cannot be blank")
+//    private Skills skillDescription;
 
 }

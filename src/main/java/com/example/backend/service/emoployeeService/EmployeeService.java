@@ -21,6 +21,10 @@ public interface EmployeeService {
 
     Employee addTestEmployee(Request request);
 
+    Employee addEmployeeTest(Employee employee);
+
+    Employee saveEmployee(EmployeeDto userRequest);
+
 
 //   Employee addEmployee(Request request);
 

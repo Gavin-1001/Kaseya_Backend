@@ -43,15 +43,6 @@ public class AuthenticationController {
     }
 
 
-//    @PostMapping("/register")
-//    public ResponseEntity<?> signUp(@RequestBody @Valid UserDto userRequest){
-//        if (userService.findByUsername(userRequest.getUsername()).isPresent())  {
-//            return new ResponseEntity<>(HttpStatus.CONFLICT);
-//        }
-//        return new ResponseEntity<>(userService.saveUser(userRequest), HttpStatus.CREATED);
-//    }
-
-
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@RequestBody User user){
         return new ResponseEntity<>(authenticationService.signInAndReturnJwt(user), HttpStatus.OK);

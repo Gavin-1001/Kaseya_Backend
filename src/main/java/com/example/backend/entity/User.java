@@ -26,6 +26,7 @@ public class User {
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(name = "id", unique = true)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //removes the property from the response, can write only
     private String id;
 
     @Column(name = "username", unique = true, nullable = false, length = 100)
