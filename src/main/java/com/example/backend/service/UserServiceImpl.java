@@ -1,16 +1,12 @@
 package com.example.backend.service;
-import com.example.backend.entity.Employee;
 import com.example.backend.entity.Role;
 import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
-import com.example.backend.requests.EmployeeDto;
-import com.example.backend.requests.UserDto;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
