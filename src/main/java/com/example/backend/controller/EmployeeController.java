@@ -2,7 +2,6 @@ package com.example.backend.controller;
 
 import com.example.backend.entity.Employee;
 import com.example.backend.repository.EmployeeRepository;
-import com.example.backend.requests.EmployeeDto;
 import com.example.backend.service.emoployeeService.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,13 +32,14 @@ public class EmployeeController {
 
 
     @GetMapping("employees")
-    public ResponseEntity<?> findAllUsers(){
+    public ResponseEntity<?> findAllUsers() {
         return ResponseEntity.ok(employeeService.findAllUsers());
         //http://localhost:8080/api/employees
     }
-// Send form as a list
+
+    // Send form as a list
     @PostMapping("employees")
-    public ResponseEntity<?> addEmployee(@RequestBody @Valid List<Employee> employee){
+    public ResponseEntity<?> addEmployee(@RequestBody @Valid List<Employee> employee) {
         return ResponseEntity.ok(employeeRepository.saveAll(employee));
         //http://localhost:8080/api/employees
     }
@@ -49,8 +49,6 @@ public class EmployeeController {
 //        return new ResponseEntity<>(employeeService.addEmployeeTest(employee), HttpStatus.CREATED);
 //        //http://localhost:8080/api/employees
 //    }
-
-
 
 
     @PutMapping("employees/{id}")
@@ -69,8 +67,6 @@ public class EmployeeController {
         return new ResponseEntity<>(HttpStatus.OK);
         //http://localhost:8080/api/employees/6
     }
-
-
 
 
 }
